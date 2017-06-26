@@ -1,50 +1,47 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Vivify blog</title>
+<?php include 'header.php' ?>
 
-</head>
-<body class="main-page">
-<link rel="stylesheet" type="text/css" href="css/main.css" media="screen">
-  <header>
-      <!-- This is page’s header -->
-      <h2>VivifyBlog</h2>
-      <nav>
-        <a href="index.html" title="Homepage">Home</a>
-        <a href="about.html" title="About">About</a>
-        <a href="contact.html" title="Contact">Contact</a>
-        <a href="admin/admin.html" title="Admin">Admin</a>
-      </nav>
-  </header>
-  <main>
-    <!-- This is page’s main content -->
-    <h1 class="page-title">
-      HEADER - MV by DR/Vivify
-    </h1>
-    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.</p>
+  <content>
+    <div class="article-container">
 
-    <button type="button" name="btnGetStarted">Get started today</button>
+      <?php
+        $page = isset($_GET['page']) ? $_GET['page'] : 1;
+        //$numOfArticles = isset($_SESSION['articleCount']) ? $_SESSION['articleCount'] : 0;
 
+        //$offset = $numOfArticles ? $numOfArticles/$page : 0;
+        $offset = $articleCount/$page;
+        var_dump($offset);
+        $sql = "SELECT * FROM articles ORDER BY created DESC LIMIT ". $offset.",1";
+        $articles = $dbBlog->fetchData($sql);
+        $_SESSION['articleCount'] = isset($articles) ? count($articles):0;
+        foreach ($articles as $record) {
 
-  </main>
+          $article = new Article($dbBlog, $record);
+          //var_dump($article->created);
+          echo("<h2>".$article->title."</h2>");
+          echo("<label>".$article->getCreatedDate(). " by ". $article->getAuthor() ."</label>");
+          echo("<p>".$article->text."</p>");
+        }
 
-  <div class="article-container">
-    <div>
-      <h1></h1>
-      <content>
-        <p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500Lorem Ipsum has been the industry's standard dummy text ever since the 1500</p>
-        <p>Lorem Ipsum has been the industry's standard dummy text ever since the 1500Lorem Ipsum has been the industry's standard dummy text ever since the 1500</p>
-      </content>
+      ?>
+
     </div>
-    <div></div>
-    <div></div>
-  </div>
+    <div class="action-container pager">
 
-  <footer>
-    FOOTER Address
-  </footer>
-</body>
-</html>
+      <?php
+        $page = isset($_GET['page']) ? $_GET['page'] : 0;
+        $next = $page + 1;
+        $previous = $page - 1;
+        if($page == 0){
+
+          echo("<a href=\"index.php?page=$next\" class=\"link-button\">Newer</a>");
+
+        }else{
+          echo("<a href=\"index.php?page=$previous\" class=\"link-button\">Older</a>");
+          echo("<a href=\"index.php?page=$next\" class=\"link-button\">Newer</a>");
+        };
+      ?>
+
+
+    </div>
+  </content>
+<?php include 'footer.php' ?>
