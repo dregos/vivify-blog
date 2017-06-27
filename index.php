@@ -29,8 +29,7 @@
         foreach ($articles as $record) {
 
           $article = new Article($dbBlog, $record);
-          //var_dump($article->created);
-          echo("<h2>".$article->title."</h2>");
+          echo("<h2><a href=\"article.php?id=".$article->getId()."\">".$article->title."</a></h2>");
           echo("<h4>".$article->category->getName()."</h4>");
           echo("<label>".$article->getCreatedDate(). " by ". $article->getAuthor() ."</label>");
           echo("<p>".$article->text."</p>");

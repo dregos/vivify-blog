@@ -70,6 +70,12 @@
 	padding: 0;
 	margin: 0;
 }
+.article-container > h2 > a{
+	text-decoration: none;
+	font-style: inherit;
+	color:inherit;
+}
+
 .article-container > h4 {
 	margin-top: 1px;
 }

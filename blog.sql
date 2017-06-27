@@ -12,3 +12,13 @@ UPDATE articles
 SET category_id = 3
 WHERE articles.id=6;
 select * from articles;
+
+
+ALTER TABLE comments
+ADD created DATETIME DEFAULT CURRENT_TIMESTAMP;
+
+INSERT INTO comments (text, user_id, article_id)
+VALUES
+	("Ovo je jako interesantno",1,1),
+	("Ovo je jako super",2,1),
+	("Ma nemaš pojma",3,1);

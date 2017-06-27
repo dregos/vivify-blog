@@ -67,9 +67,11 @@ class Db{
     WHERE articles.id =$articleId";
     //var_dump($sql);
     $retVal = $this->fetchData($sql);
-    $articleObj = new Article($retVal);
-    return articleObj;
-
+    //echo("article/retVal:");
+    //var_dump($retVal);
+    if(empty($retVal)){ return null; }
+    $articleObj = new Article($this, $retVal[0]);
+    return $articleObj;
   }
 
   public function updateArticle($article){
@@ -115,6 +117,53 @@ class Category{
 
 }
 
+class Comment{
+  private $id;
+  private $author;
+  private $text;
+  private $article;
+  public $created;
+  public $db;
+
+  public function setDb($db){ $this->db = $db; }
+  public function setId($id){ $this->id = $id; }
+  public function setText($text){ $this->text = $text; }
+  public function getText(){ return $this->text; }
+  public function getCreatedDate(){
+    $date = date_create($this->created);
+    return $date->format('d.m.Y');
+  }
+
+  public function setAuthor($user_id){
+    $this->author = new User($this->db, $user_id);
+  }
+  public function getAuthor(){ return $this->author; }
+
+  public function setArticle($article_id){
+    $this->article = new Article($this->db, $article_id);
+  }
+  public function getArticle(){ return $this->article; }
+
+  public function __construct($db, $comment_id){
+    $this->db = isset($db) ? $db:new Db($log);
+    if(!isset($comment_id) || $comment_id==""){return null; }
+
+    $sql = "SELECT comments.id, comments.text,
+                    comments.user_id as user_id,
+                    comments.article_id as article_id
+              FROM comments
+              WHERE comments.id=$comment_id";
+    $record = $db->fetchData($sql);
+    //var_dump($record);
+    $this->setId($record[0]["id"]);
+    $this->setText($record[0]["text"]);
+    $this->created = isset($record[0]["created"]) ? $record[0]["created"]:"";
+    $this->setAuthor($record[0]["user_id"]);
+    //$this->setArticle($record[0]["article_id"]);
+  }
+
+}
+
 class User{
   private $user_id;
   private $user_email;
@@ -144,6 +193,7 @@ class User{
 
 
     $record = $db->fetchData($sql);
+    //echo("User record:");
     //var_dump($record);
     $this->setUserId($record[0]["id"]);
     $this->setUserEmail($record[0]["email"]);
@@ -153,6 +203,7 @@ class User{
 }
 
 class Article{
+  private $id;
   public $title;
   public $text;
   public $created;
@@ -160,17 +211,37 @@ class Article{
   public $user;
   public $category;
   public $db;
+  private $comments = [];
 
-  public function getAuthor(){
-    return $this->user->getFullName();
-  }
+  public function setId($id){ $this->id = $id; }
+  public function getId(){ return $this->id; }
+
+  public function getAuthor(){ return $this->user->getFullName(); }
   public function getCreatedDate(){
     $date = date_create($this->created);
     return $date->format('d.m.Y');
   }
 
+  public function getArticleComments(){
+    return $this->comments;
+  }
+
+  public function setArticleComments(){
+    $sql = "SELECT comments.id, comments.text, comments.created, comments.user_id,
+                  comments.article_id as article_id
+    FROM comments
+    WHERE article_id=".$this->getId();
+
+    $records = $this->db->fetchData($sql);
+
+    foreach($records as $val){
+      $this->comments[] = new Comment($this->db, $val["id"]);
+    }
+  }
+
   public function __construct($db, $record){
     $this->db = isset($db) ? $db:new Db($log);
+    $this->setId(isset($record["id"]) ? $record["id"]:"");
     $this->title = isset($record["title"]) ? $record["title"]:"";
     $this->text = isset($record["text"]) ? $record["text"]:"";
     $this->created = isset($record["created"]) ? $record["created"]:"";
@@ -179,6 +250,8 @@ class Article{
     $this->user = new User($db, isset($record["user_id"]) ? $record["user_id"]:"");
 
     $this->category = new Category($db, isset($record["category_id"]) ? $record["category_id"]:"");
+
+    $this->setArticleComments();
   }
 }
 
