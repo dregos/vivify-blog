@@ -53,21 +53,64 @@ class Db{
       LEFT JOIN categories ON categories.id = ads.category_id
       LEFT JOIN users ON users.id = ads.user_id
       LEFT JOIN profiles ON profiles.user_id = users.id WHERE ads.id = $adId";
+
+      public $title;
+      public $text;
+      public $created;
+      public $last_modified;
+      public $user;
+      public $category;
     */
-    return $this->fetchData($sql);
+    $sql = "SELECT articles.id, articles.title, articles.text, articles.created, articles.last_modified,
+    articles.user_id as user_id, articles.category_id as category_id
+    FROM articles
+    WHERE articles.id =$articleId";
+    //var_dump($sql);
+    $retVal = $this->fetchData($sql);
+    $articleObj = new Article($retVal);
+    return articleObj;
 
   }
 
   public function updateArticle($article){
     //$this->log->writeLog("ad_id:$ad->ad_id", null);
     //$this->log->writeLog("category_id:$ad->category_id", null);
-    $sqlUpdateAd = "UPDATE ads SET title = '{$ad->title}', text = '{$ad->text}', category_id = $ad->category_id WHERE ads.id = $ad->ad_id";
+    //$sqlUpdateArticle = "UPDATE ads SET title = '{$article->title}', text = '{$article->text}', category_id = $article->category_id WHERE ads.id = $article->ad_id";
     //$this->log->writeLog("Update query:$updateAdQuery", null);
-    $this->executeQuery($sqlUpdateAd);
+    //$this->executeQuery($sqlUpdateAd);
   }
 
   public function createAd($ad){
     $sqlCreateAd = "INSERT INTO ads (ads.title, ads.text) VALUES ('{$ad->title}', '{$ad->text}', '')";
+  }
+
+  public function getAllCategories(){
+    $sql = "SELECT categories.id as category_id, categories.name as category_name FROM categories";
+    $this->fetchData($sql);
+  }
+
+}
+
+class Category{
+  private $id;
+  private $name;
+
+  public function setId($id){ $this->id = $id; }
+  public function setName($name){ $this->name = $name; }
+  public function getId(){ return $this->id; }
+  public function getName(){ return $this->name; }
+
+  public function __construct($db, $category_id){
+    $this->db = isset($db) ? $db:new Db($log);
+    if(!isset($category_id) || $category_id==""){return null; }
+
+    $sql = "SELECT categories.id, categories.name
+              FROM categories
+              WHERE categories.id=$category_id";
+    $record = $db->fetchData($sql);
+    //var_dump($record);
+    $this->setId($record[0]["id"]);
+    $this->setName($record[0]["name"]);
   }
 
 }
@@ -115,6 +158,7 @@ class Article{
   public $created;
   public $last_modified;
   public $user;
+  public $category;
   public $db;
 
   public function getAuthor(){
@@ -134,7 +178,7 @@ class Article{
 
     $this->user = new User($db, isset($record["user_id"]) ? $record["user_id"]:"");
 
-
+    $this->category = new Category($db, isset($record["category_id"]) ? $record["category_id"]:"");
   }
 }
 
