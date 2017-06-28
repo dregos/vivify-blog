@@ -82,6 +82,38 @@
 	margin-top: 1px;
 }
 
+
+.admin-user-posts-container{
+	padding-top: 10px;
+  margin: 15px;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+}
+.admin-user-posts-table{
+	width: 100%;
+	text-align:left;
+	border: 1px solid #d1d1d1;
+}
+.admin-user-posts-table > tbody > tr > td, th{
+	padding:10px;
+}
+.admin-user-posts-table > tbody > tr > td, th > span{
+	padding:10px;
+}
+.admin-user-posts-table .first-column{
+	width:70%;
+}
+.admin-user-posts-table .header-column{
+	background-color:#d1d1d1;
+}
+.admin-user-posts-table .table-cell{
+	border-bottom:1px #d1d1d1;
+}
+.admin-user-posts-table .table-cell > span{
+	padding-right: 5px;
+}
+
 /* MAIN - COMMENTS CONTAINER */
 .comments-container{
 	display: block;

@@ -81,19 +81,26 @@ class Db{
                             VALUES ('$comment_text', '$user_id', $article_id)";
 
     $response = $this->executeQuery($insertCommentQuery);
-    $this->log->writeLog("createComment response:".$response, null);
-    //$response = $this->fetchData($insertCommentQuery);
-    /*
-    $sql = "SELECT id, text, user_id, article_id
-            FROM comments
-            WHERE ";
-*/
     return $response;
   }
 
   public function getAllCategories(){
     $sql = "SELECT categories.id as category_id, categories.name as category_name FROM categories";
     $this->fetchData($sql);
+  }
+
+  public function getAllUserArticles($user){
+    $sql = "SELECT articles.user_id as user_id, articles.id as article_id, articles.title as title,
+                   articles.text, articles.created as created
+    FROM articles
+    WHERE user_id=".$user->getId()." ORDER BY created DESC";
+    $records = $this->fetchData($sql);
+    //var_dump($records);
+
+    foreach($records as $article){
+      $articles[] = new Article($this, $article);
+    }
+    return $articles;
   }
 
 }
@@ -188,7 +195,7 @@ class User{
   private $user_email;
   private $first_name;
   private $last_name;
-
+  private $db;
 
   public function setUserId($user_id){ $this->user_id = $user_id; }
   public function setUserEmail($email){ $this->email = $email; }
@@ -218,6 +225,8 @@ class User{
     $this->setUserEmail($record[0]["email"]);
     $this->setName($record[0]["first_name"], $record[0]["last_name"]);
   }
+
+
 
 }
 
@@ -261,6 +270,7 @@ class Article{
   public function __construct($db, $record){
     $this->db = isset($db) ? $db:new Db($log);
     $this->setId(isset($record["id"]) ? $record["id"]:"");
+    if($this->getId()==""){ $this->setId(isset($record["article_id"]) ? $record["article_id"]:""); }
     $this->title = isset($record["title"]) ? $record["title"]:"";
     $this->text = isset($record["text"]) ? $record["text"]:"";
     $this->created = isset($record["created"]) ? $record["created"]:"";

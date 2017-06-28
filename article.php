@@ -21,7 +21,7 @@
 
     </div>
     <script> window.article_id = <?php echo($article->getId()) ?>;</script>
-    
+
     <?php include 'comments.php' ?>
 
   </content>

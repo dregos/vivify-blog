@@ -12,12 +12,15 @@
 </div>
 <div class="comments-container">
   <?php
+
     $comments = $article->getArticleComments();
     //var_dump($comments);
-    if(empty($comments)){echo("<label>Be the first to comment this post.</label>"); return; }
-
-    foreach($comments as $comment){
-      $comment->returnHTML();
+    if(empty($comments)){
+      echo("<label>Be the first to comment this post.</label>");
+    }else{
+      foreach($comments as $comment){
+        $comment->returnHTML();
+      }
     }
 
   ?>
