@@ -16,7 +16,7 @@ class Db{
     try {
 
         $this->log = isset($logObj)? $logObj : new Log();
-        $this->conn = new PDO("mysql:host=$this->servername;dbname=$this->dbname", $this->username, $this->password);
+        $this->conn = new PDO("mysql:host=$this->servername;dbname=$this->dbname;charset=utf8", $this->username, $this->password);
         // set the PDO error mode to exception
         $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
@@ -42,25 +42,14 @@ class Db{
     //echo ($sql);
     $statement = $this->conn->prepare($query);
     // execute statement
+
     $statement->execute();
-    return true;
+    return $this->conn->lastInsertId();
+    //return $statement->fetch();
   }
 
   public function getArticleById($articleId){
-    /*$sql = "SELECT ads.id, ads.title, ads.text, ads.created_at, ads.expires_on,categories.id as category_id,
-      categories.name AS category_name, users.id AS user_id,users.email AS email,
-      profiles.first_name, profiles.last_name, profiles.city, profiles.phone FROM ads
-      LEFT JOIN categories ON categories.id = ads.category_id
-      LEFT JOIN users ON users.id = ads.user_id
-      LEFT JOIN profiles ON profiles.user_id = users.id WHERE ads.id = $adId";
 
-      public $title;
-      public $text;
-      public $created;
-      public $last_modified;
-      public $user;
-      public $category;
-    */
     $sql = "SELECT articles.id, articles.title, articles.text, articles.created, articles.last_modified,
     articles.user_id as user_id, articles.category_id as category_id
     FROM articles
@@ -82,8 +71,24 @@ class Db{
     //$this->executeQuery($sqlUpdateAd);
   }
 
-  public function createAd($ad){
-    $sqlCreateAd = "INSERT INTO ads (ads.title, ads.text) VALUES ('{$ad->title}', '{$ad->text}', '')";
+  public function createComment($data){
+
+    $user_id = $data['user_id'];
+    $article_id = $data['article_id'];
+    $comment_text = $data['text'];
+
+    $insertCommentQuery = "INSERT INTO comments (text, user_id, article_id)
+                            VALUES ('$comment_text', '$user_id', $article_id)";
+
+    $response = $this->executeQuery($insertCommentQuery);
+    $this->log->writeLog("createComment response:".$response, null);
+    //$response = $this->fetchData($insertCommentQuery);
+    /*
+    $sql = "SELECT id, text, user_id, article_id
+            FROM comments
+            WHERE ";
+*/
+    return $response;
   }
 
   public function getAllCategories(){
@@ -131,7 +136,7 @@ class Comment{
   public function getText(){ return $this->text; }
   public function getCreatedDate(){
     $date = date_create($this->created);
-    return $date->format('d.m.Y');
+    return $date;
   }
 
   public function setAuthor($user_id){
@@ -149,6 +154,7 @@ class Comment{
     if(!isset($comment_id) || $comment_id==""){return null; }
 
     $sql = "SELECT comments.id, comments.text,
+                    comments.created,
                     comments.user_id as user_id,
                     comments.article_id as article_id
               FROM comments
@@ -162,6 +168,19 @@ class Comment{
     //$this->setArticle($record[0]["article_id"]);
   }
 
+
+  public function returnHTML(){
+    echo("<header class=\"comment-header\">");
+      echo("<author>".$this->getAuthor()->getFullName()."</author>");
+      echo("<date class=\"tooltip\">");
+        echo($this->getCreatedDate()->format('H:i'));
+        echo("<span class=\"tooltiptext\">".$this->getCreatedDate()->format('d.m.Y H:i')."</span>");
+      echo("</date>");
+    echo("</header>");
+    echo("<content");
+      echo("<p>".$this->getText()."</p>");
+    echo("</content>");
+  }
 }
 
 class User{
@@ -229,8 +248,8 @@ class Article{
   public function setArticleComments(){
     $sql = "SELECT comments.id, comments.text, comments.created, comments.user_id,
                   comments.article_id as article_id
-    FROM comments
-    WHERE article_id=".$this->getId();
+      FROM comments
+      WHERE article_id=".$this->getId(). " ORDER BY created DESC";
 
     $records = $this->db->fetchData($sql);
 

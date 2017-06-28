@@ -85,8 +85,35 @@
 /* MAIN - COMMENTS CONTAINER */
 .comments-container{
 	display: block;
+	width: 93%;
+	margin: auto;
+}
+
+.comment-header{
+	display: flex;
+	flex-direction:row;
 	width: 100%;
 }
+.comment-header > author {
+	margin:0;
+	font-weight: bold;
+}
+.comment-header > date {
+	padding-left: 8px;
+	vertical-align: middle;
+	color:grey;
+}
+.comment-header > content {
+	margin-top: 2px;
+}
+
+.comment-form{
+	border-bottom: 1px solid #e3e1e1;
+}
+.comment-form > h4{
+	margin:2px;
+}
+
 
 /* MAIN - FORM CONTAINER */
 .form-container {
@@ -151,6 +178,26 @@
 .action-container > a.link-button:hover{
 	background-color:#3634b1;
 	color:white;
+}
+.action-container .button{
+	border-radius:2px;
+	border:none;
+	background: none;
+	color:black;
+	margin: 6px;
+	padding: 8px 24px;
+  text-align: center;
+	cursor:pointer;
+	text-decoration: none;
+}
+.action-container .button:hover{
+	background-color:#3634b1;
+	color:white;
+}
+
+.action-container .alert {
+    padding: 10px;
+    background-color: #f44336;
 }
 
 .action-container.pager{

@@ -20,21 +20,9 @@
       ?>
 
     </div>
-    <div class="form-container">
-    </div>
-    <div class="comments-container">
-      <?php
-        $comments = $article->getArticleComments();
-        //var_dump($comments);
-        if(empty($comments)){echo("<label>Be the first to comment this post.</label>"); return; }
-        foreach($comments as $comment){
-          echo("<h4>".$comment->getCreatedDate(). " by ". $comment->getAuthor()->getFullName() ."</h4>");
-          echo("<p>".$comment->getText()."</p>");
-        }
-        //
-        //
-      ?>
-    </div>
+    <script> window.article_id = <?php echo($article->getId()) ?>;</script>
+    
+    <?php include 'comments.php' ?>
 
   </content>
 <?php include 'footer.php' ?>
