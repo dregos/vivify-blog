@@ -61,6 +61,8 @@
 	width: 80%;
 	flex-direction: column;
 }
+
+/* MAIN - ARTICLE CONTAINER */
 .article-container{
 	padding-top: 10px;
 	margin:15px;
@@ -80,6 +82,13 @@
 	margin-top: 1px;
 }
 
+/* MAIN - COMMENTS CONTAINER */
+.comments-container{
+	display: block;
+	width: 100%;
+}
+
+/* MAIN - FORM CONTAINER */
 .form-container {
 	padding-top: 10px;
 	margin:15px;
@@ -107,7 +116,7 @@
   width: 50%;
   margin-bottom: 10px;
 }
-
+/* MAIN - FORM ACTION CONTAINER */
 .action-container{
 	display: flex;
 	flex-direction: row;
