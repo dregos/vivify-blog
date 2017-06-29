@@ -62,14 +62,37 @@ class Db{
     $articleObj = new Article($this, $retVal[0]);
     return $articleObj;
   }
+  public function createArticle($data){
 
-  public function updateArticle($article){
-    //$this->log->writeLog("ad_id:$ad->ad_id", null);
-    //$this->log->writeLog("category_id:$ad->category_id", null);
-    //$sqlUpdateArticle = "UPDATE ads SET title = '{$article->title}', text = '{$article->text}', category_id = $article->category_id WHERE ads.id = $article->ad_id";
-    //$this->log->writeLog("Update query:$updateAdQuery", null);
-    //$this->executeQuery($sqlUpdateAd);
+    $user_id = $data['user_id'];
+    //$article_id = $data['article_id'];
+    $article_title = $data['title'];
+    $article_text = $data['text'];
+    $category_id = $data['category_id'];
+
+
+    $insertQuery = "INSERT INTO articles (title, text, user_id, category_id)
+                    VALUES ('$article_title', '$article_text', '$user_id', '$category_id')";
+
+    $response = $this->executeQuery($insertQuery);
+    return $response;
   }
+  public function updateArticle($article){
+
+    $sqlUpdateArticle = "UPDATE articles SET
+                          title = \"{$article->title}\",
+                          text = \"{$article->text}\",
+                          category_id = ".$article->category->getId().",
+                          user_id = ".$article->user->getId()."
+                          WHERE articles.id = ". $article->getId();
+    //$this->log->writeLog($sqlUpdateArticle, null);
+    $this->executeQuery($sqlUpdateArticle);
+  }
+  public function deleteArticle($id){
+    $sql = "DELETE FROM articles WHERE id=$id";
+    $this->executeQuery($sql);
+  }
+
 
   public function createComment($data){
 
@@ -85,13 +108,17 @@ class Db{
   }
 
   public function getAllCategories(){
-    $sql = "SELECT categories.id as category_id, categories.name as category_name FROM categories";
-    $this->fetchData($sql);
+    $sql = "SELECT categories.id , categories.name as category_name FROM categories";
+    $records = $this->fetchData($sql);
+    foreach($records as $category){
+      $categories[] = new Category($this, $category["id"]);
+    }
+    return $categories;
   }
 
   public function getAllUserArticles($user){
     $sql = "SELECT articles.user_id as user_id, articles.id as article_id, articles.title as title,
-                   articles.text, articles.created as created
+                   articles.text, articles.created as created, articles.category_id as category_id
     FROM articles
     WHERE user_id=".$user->getId()." ORDER BY created DESC";
     $records = $this->fetchData($sql);

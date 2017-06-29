@@ -1,0 +1,65 @@
+2017-06-29 15:47:09 --> <option value=1>
+2017-06-29 15:47:09 --> <option value=2 selected>
+2017-06-29 15:47:09 --> <option value=3>
+2017-06-29 15:47:26 --> <option value=1>
+2017-06-29 15:47:26 --> <option value=2 selected>
+2017-06-29 15:47:26 --> <option value=3>
+2017-06-29 15:48:35 --> <option value="1>
+2017-06-29 15:48:35 --> <option value="2 selected>
+2017-06-29 15:48:35 --> <option value="3>
+2017-06-29 15:49:39 --> <option value="1>
+2017-06-29 15:49:39 --> <option value="2" selected>
+2017-06-29 15:49:39 --> <option value="3>
+2017-06-29 15:49:43 --> <option value="1>
+2017-06-29 15:49:43 --> <option value="2" selected>
+2017-06-29 15:49:43 --> <option value="3>
+2017-06-29 15:50:07 --> " >
+2017-06-29 15:50:07 --> <option value="2" selected>
+2017-06-29 15:50:07 --> " >
+2017-06-29 15:50:08 --> " >
+2017-06-29 15:50:08 --> <option value="2" selected>
+2017-06-29 15:50:08 --> " >
+2017-06-29 15:52:40 --> <option value="1"" >
+2017-06-29 15:52:40 --> <option value="2"" selected>
+2017-06-29 15:52:40 --> <option value="3"" >
+2017-06-29 15:52:57 --> <option value="1"" >
+2017-06-29 15:52:57 --> <option value="2" selected>
+2017-06-29 15:52:57 --> <option value="3"" >
+2017-06-29 15:53:39 --> <option value="1">
+2017-06-29 15:53:39 --> <option value="2" selected>
+2017-06-29 15:53:39 --> <option value="3">
+2017-06-29 17:06:30 --> 
+2017-06-29 17:07:11 --> 
+2017-06-29 17:08:30 --> 
+2017-06-29 17:11:14 --> zovem update article
+2017-06-29 17:12:01 --> zovem update article
+2017-06-29 17:14:49 --> zovem update article
+2017-06-29 17:14:49 --> UPDATE articles SET
+                          title = 'POST 6 -a',
+                          text = '            Lorem Ipsum has been the industry's standard dummy text ever since the 1500.          ',
+                          category_id = '3',
+                          category_id = '1'
+                          WHERE articles.id = 6
+2017-06-29 17:15:50 --> zovem update article
+2017-06-29 17:15:50 --> UPDATE articles SET
+                          title = 'POST 6 -a',
+                          text = '            Lorem Ipsum has been the industry's standard dummy text ever since the 1500.          ',
+                          category_id = '3',
+                          user_id = '1'
+                          WHERE articles.id = 6
+2017-06-29 17:16:50 --> zovem update article
+2017-06-29 17:16:50 --> UPDATE articles SET
+                          title = 'POST 6 -a',
+                          text = '            Lorem Ipsum has been the industry's standard dummy text ever since the 1500.          ',
+                          category_id = 3,
+                          user_id = 1
+                          WHERE articles.id = 6
+2017-06-29 17:18:58 --> zovem update article
+2017-06-29 17:18:58 --> UPDATE articles SET
+                          title = "POST 6 -b",
+                          text = "                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500.                    ",
+                          category_id = 3,
+                          user_id = 1
+                          WHERE articles.id = 6
+2017-06-29 17:23:28 --> zovem update article
+2017-06-29 17:23:37 --> zovem update article
