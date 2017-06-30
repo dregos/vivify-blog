@@ -1,6 +1,6 @@
 <?php include 'header.php' ?>
 <?php
-  $user = new User($dbBlog, 1);
+  $user = new User($dbBlog, $_SESSION['user_id']);
   $allCategories = $dbBlog->getAllCategories();
 
   if(isset($_GET)){

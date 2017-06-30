@@ -186,6 +186,13 @@
   width: 50%;
 }
 
+.form-control.alert {
+    padding: 8px;
+    background-color: #f44336;
+		margin: auto;
+    margin-left: 5px;
+}
+
 /* MAIN - FORM ACTION CONTAINER */
 .action-container{
 	display: flex;

@@ -1,4 +1,29 @@
 <?php include 'header.php' ?>
+<?php
+
+if(isset($_POST)){
+
+  if(isset($_POST['email'])){
+    /*
+    echo("<pre>");
+    var_dump($_POST);
+    echo("</pre>");
+    */
+    $email = $_POST['email'];
+    $text = $_POST['text'];
+
+    $to = "dregojevic@gmail.com";
+    $subject = "Vivify-blog - contact";
+    $txt = $text;
+    $headers = "From: $email" . "\r\n";
+
+    mail($to,$subject,$txt,$headers);
+
+    header('Location: thankYou.php');
+  }
+}
+
+?>
 
   <content>
 

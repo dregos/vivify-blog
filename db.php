@@ -48,6 +48,54 @@ class Db{
     //return $statement->fetch();
   }
 
+  public function signIn($data){
+
+
+    $userEmail= $data['email'];
+    $userPassword = $data['password'];
+
+    $sql = "SELECT users.id as user_id, users.email, users.password
+    FROM users
+    WHERE users.email =\"$userEmail\" AND users.password=\"$userPassword\"";
+    $this->log->writeLog("sql:".$sql, null);
+
+    $response = $this->fetchData($sql);
+
+    if(empty($response)){
+      return "";
+    }else{
+      $this->log->writeLog("db/signIn/userId:".var_dump($response[0]['user_id']), null);
+      return $response[0]['user_id'];
+    }
+
+
+
+
+  }
+
+  public function createNewUser($data){
+
+    //$user_id = $data['user_id'];
+    //$article_id = $data['article_id'];
+    $firstName = $data['first_name'];
+    $lastName = $data['last_name'];
+    $email= $data['email'];
+    $password = $data['password'];
+
+
+    $insertQuery = "INSERT INTO users (email, password)
+                    VALUES ('$email', '$password')";
+    $userId = $this->executeQuery($insertQuery);
+
+    //$this->log->writeLog("new user id is:".$userId, null);
+
+    $insertQuery = "INSERT INTO user_profiles (user_id, first_name, last_name)
+                    VALUES ('$userId', '$firstName', '$lastName')";
+    $this->executeQuery($insertQuery);
+
+    return $userId;
+  }
+
   public function getArticleById($articleId){
 
     $sql = "SELECT articles.id, articles.title, articles.text, articles.created, articles.last_modified,
@@ -128,6 +176,18 @@ class Db{
       $articles[] = new Article($this, $article);
     }
     return $articles;
+  }
+
+  public function emailExists($email){
+
+    $sql = "SELECT users.email FROM users WHERE users.email=\"".$email."\"";
+    //var_dump($sql);
+    //$this->log->writeLog($sql, null);
+    $retVal = $this->fetchData($sql);
+    //echo("emailcheck/retVal:");
+    //var_dump($retVal);
+    if(empty($retVal)){ return false; }
+    return true;
   }
 
 }

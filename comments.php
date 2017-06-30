@@ -12,7 +12,7 @@
 </div>
 <div class="comments-container">
   <?php
-
+    
     $comments = $article->getArticleComments();
     //var_dump($comments);
     if(empty($comments)){

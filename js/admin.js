@@ -51,7 +51,7 @@ $(document).ready(function () {
   function clearFormData(){
     $('#article-title').val('');
     $('#article-text').val('');
-    $('#category_id').val();
+    $('#category_id').val('');
   }
 
   function makeComment(data) {

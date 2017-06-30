@@ -22,7 +22,9 @@
         echo("<td class=\"table-cell\">".$article->title."</td>");
         echo("<td class=\"table-cell\">".$article->category->getName()."</td>");
         echo("<td class=\"table-cell action-cell\">");
-          echo("<a href=\"?did=".$article->getId()."\">Delete</a><a href=\"?eid=".$article->getId()."\">Edit</a>");
+          echo("<div class=\"action-container\">");
+            echo("<a class=\"button\" href=\"?did=".$article->getId()."\">Delete</a><a class=\"button\" href=\"?eid=".$article->getId()."\">Edit</a>");
+          echo("</div>");
         echo("</td>");
       echo("</tr>");
       //echo $arcticle->returnHTML();

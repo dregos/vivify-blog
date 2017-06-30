@@ -1,0 +1,129 @@
+2017-06-30 15:56:33 --> signIn data:
+2017-06-30 15:57:41 --> signIn data:
+2017-06-30 15:59:08 --> signIn data:
+2017-06-30 15:59:48 --> signIn data:
+2017-06-30 16:01:17 --> signIn data:
+2017-06-30 16:01:17 --> sql:SELECT users.id, users.email, users.password
+    FROM users
+    WHERE users.email =test AND users.password=test
+2017-06-30 16:02:30 --> signIn data:
+2017-06-30 16:02:30 --> sql:SELECT users.id, users.email, users.password
+    FROM users
+    WHERE users.email ="test" AND users.password="test"
+2017-06-30 16:02:30 --> fetched data:
+2017-06-30 16:02:50 --> signIn data:
+2017-06-30 16:02:50 --> sql:SELECT users.id, users.email, users.password
+    FROM users
+    WHERE users.email ="test" AND users.password="test2"
+2017-06-30 16:02:50 --> fetched data:
+2017-06-30 16:06:46 --> signIn data:
+2017-06-30 16:07:54 --> signIn data:
+2017-06-30 16:08:35 --> signIn data:
+2017-06-30 16:08:54 --> signIn data:
+2017-06-30 16:10:01 --> signIn data:
+2017-06-30 16:13:21 --> signIn data:
+2017-06-30 16:13:21 --> fetched data:
+2017-06-30 16:14:44 --> signIn data:
+2017-06-30 16:15:04 --> signIn data:
+2017-06-30 16:15:32 --> signIn data:
+2017-06-30 16:15:32 --> 
+2017-06-30 16:15:44 --> signIn data:
+2017-06-30 16:15:44 --> 
+2017-06-30 16:16:59 --> signIn data:1
+2017-06-30 16:16:59 --> 
+2017-06-30 16:17:31 --> sql:SELECT users.id, users.email, users.password
+    FROM users
+    WHERE users.email ="test" AND users.password="test"
+2017-06-30 16:17:31 --> 
+2017-06-30 16:18:59 --> sql:SELECT users.id as user_id, users.email, users.password
+    FROM users
+    WHERE users.email ="test" AND users.password="test"
+2017-06-30 16:18:59 --> 
+2017-06-30 16:19:52 --> sql:SELECT users.id as user_id, users.email, users.password
+    FROM users
+    WHERE users.email ="test" AND users.password="test"
+2017-06-30 16:19:52 --> db/signIn/userId:
+2017-06-30 16:19:52 --> 
+2017-06-30 16:21:25 --> sql:SELECT users.id as user_id, users.email, users.password
+    FROM users
+    WHERE users.email ="test" AND users.password="test"
+2017-06-30 16:21:25 --> db/signIn/userId:
+2017-06-30 16:21:25 --> 
+2017-06-30 16:22:18 --> sql:SELECT users.id as user_id, users.email, users.password
+    FROM users
+    WHERE users.email ="test" AND users.password="test"
+2017-06-30 16:22:18 --> db/signIn/userId:
+2017-06-30 16:22:18 --> 
+2017-06-30 16:22:27 --> sql:SELECT users.id as user_id, users.email, users.password
+    FROM users
+    WHERE users.email ="test" AND users.password="test"
+2017-06-30 16:22:27 --> db/signIn/userId:
+2017-06-30 16:22:27 --> 
+2017-06-30 16:23:14 --> sql:SELECT users.id as user_id, users.email, users.password
+    FROM users
+    WHERE users.email ="test" AND users.password="test"
+2017-06-30 16:23:14 --> 
+2017-06-30 16:23:39 --> sql:SELECT users.id as user_id, users.email, users.password
+    FROM users
+    WHERE users.email ="test6" AND users.password="test"
+2017-06-30 16:23:39 --> 
+2017-06-30 16:24:48 --> sql:SELECT users.id as user_id, users.email, users.password
+    FROM users
+    WHERE users.email ="test4" AND users.password="test"
+2017-06-30 16:24:48 --> 
+2017-06-30 16:25:01 --> sql:SELECT users.id as user_id, users.email, users.password
+    FROM users
+    WHERE users.email ="test" AND users.password="test"
+2017-06-30 16:25:01 --> db/signIn/userId:
+2017-06-30 16:25:01 --> 
+2017-06-30 16:26:00 --> sql:SELECT users.id as user_id, users.email, users.password
+    FROM users
+    WHERE users.email ="test" AND users.password="test"
+2017-06-30 16:26:00 --> db/signIn/userId:
+2017-06-30 16:27:12 --> sql:SELECT users.id as user_id, users.email, users.password
+    FROM users
+    WHERE users.email ="test" AND users.password="test"
+2017-06-30 16:27:12 --> db/signIn/userId:
+2017-06-30 16:27:25 --> sql:SELECT users.id as user_id, users.email, users.password
+    FROM users
+    WHERE users.email ="test" AND users.password="test"
+2017-06-30 16:27:25 --> db/signIn/userId:
+2017-06-30 16:28:00 --> sql:SELECT users.id as user_id, users.email, users.password
+    FROM users
+    WHERE users.email ="test333" AND users.password="test"
+2017-06-30 16:28:18 --> sql:SELECT users.id as user_id, users.email, users.password
+    FROM users
+    WHERE users.email ="test" AND users.password="test4"
+2017-06-30 16:29:21 --> sql:SELECT users.id as user_id, users.email, users.password
+    FROM users
+    WHERE users.email ="test" AND users.password="test6"
+2017-06-30 16:29:55 --> sql:SELECT users.id as user_id, users.email, users.password
+    FROM users
+    WHERE users.email ="test" AND users.password="test5"
+2017-06-30 16:29:59 --> sql:SELECT users.id as user_id, users.email, users.password
+    FROM users
+    WHERE users.email ="test" AND users.password="test"
+2017-06-30 16:29:59 --> db/signIn/userId:
+2017-06-30 16:31:04 --> sql:SELECT users.id as user_id, users.email, users.password
+    FROM users
+    WHERE users.email ="test" AND users.password="test"
+2017-06-30 16:31:04 --> db/signIn/userId:
+2017-06-30 16:31:33 --> sql:SELECT users.id as user_id, users.email, users.password
+    FROM users
+    WHERE users.email ="test" AND users.password="test"
+2017-06-30 16:31:33 --> db/signIn/userId:
+2017-06-30 16:34:51 --> sql:SELECT users.id as user_id, users.email, users.password
+    FROM users
+    WHERE users.email ="test" AND users.password="test6"
+2017-06-30 16:36:34 --> sql:SELECT users.id as user_id, users.email, users.password
+    FROM users
+    WHERE users.email ="test" AND users.password="test"
+2017-06-30 16:36:34 --> db/signIn/userId:
+2017-06-30 16:36:42 --> sql:SELECT users.id as user_id, users.email, users.password
+    FROM users
+    WHERE users.email ="test" AND users.password="test4"
+2017-06-30 16:36:45 --> sql:SELECT users.id as user_id, users.email, users.password
+    FROM users
+    WHERE users.email ="test" AND users.password="test"
+2017-06-30 16:36:45 --> db/signIn/userId:
+2017-06-30 17:04:17 --> zovem update article
