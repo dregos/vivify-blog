@@ -127,3 +127,12 @@
     WHERE users.email ="test" AND users.password="test"
 2017-06-30 16:36:45 --> db/signIn/userId:
 2017-06-30 17:04:17 --> zovem update article
+2017-06-30 17:27:10 --> sql:SELECT users.id as user_id, users.email, users.password
+    FROM users
+    WHERE users.email ="test" AND users.password="test7"
+2017-06-30 17:27:13 --> sql:SELECT users.id as user_id, users.email, users.password
+    FROM users
+    WHERE users.email ="test" AND users.password="test"
+2017-06-30 17:27:13 --> db/signIn/userId:
+2017-06-30 17:27:55 --> zovem update article
+2017-06-30 17:28:00 --> zovem update article
